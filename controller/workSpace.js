@@ -5,28 +5,35 @@ const {paragraph} = require('../models/workSpace')
 
 module.exports = {
     postParagraph: async(data,cb) => {
-        let limit = data.limit
-        let count = data.paragraph.split(" ").length
+        let limit = data.limit;
+        let count = data.paragraph.split(" ").length;
+
         if(count === limit){
-            console.log(2)
-            console.log({data,count})
+           
             new paragraph(data).save().then((mongoRes) => {
-                console.log({mongoRes})
                 if(mongoRes.length === 0){
                     cb(false)
                 }else{
                     cb(mongoRes)
                 }
             }).catch((err) => {
-                console.log(err)
                 cb(false)
             })
         }else{
             if(count > limit){
-                return `need ${count-limit} more words`
+                cb(`need ${count-limit} less words`)
             }else{
-                return `need ${limit-count} less words`
+                cb(`need ${limit-count} more words`)
             }
         }
+    },
+
+    check: async(postData, paragraph_id, cb) => {
+       let test_paragraph = await  paragraph.findOne({_id: paragraph_id.id})
+       let upper_limit = (1 + 0.2)*test_paragraph.limit; 
+
+       if(postData.length > upper_limit){
+        cb(`you have exceeded the word limit by ${postData.length} - ${upper_limit} words`)
+       }
     }
 }
