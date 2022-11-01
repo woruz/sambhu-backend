@@ -44,7 +44,7 @@ router.post('/check/:id', async(req,res) => {
             throw new Error(validation.error.details[0].message);
         }
 
-        controllers.workSpace.check((postData, paragraph_id), ures => {
+        controllers.workSpace.check(postData, paragraph_id, ures => {
             if(ures){
                 res.json({success: true, result: ures});
             }else{
