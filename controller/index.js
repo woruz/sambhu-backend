@@ -1,9 +1,8 @@
 
 
-const workSpace = require('./workSpace')
-const history = require('./history')
+const root = require("./root");
+
 
 module.exports = {
-    workSpace,
-    history
+    root
 }
