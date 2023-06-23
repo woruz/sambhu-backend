@@ -5,7 +5,7 @@ const { email_check, verifyToken } = require('../utils/rootUtils');
 let router = express.Router()
 
 
-router.get('/hello',verifyToken, (req,res) => {
+router.get('/hello', (req,res) => {
     res.json({result: "Hello Sambhu"})
 });
 
