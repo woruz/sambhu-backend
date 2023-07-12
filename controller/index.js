@@ -1,8 +1,10 @@
 
 
 const root = require("./root");
+const sampleText = require("./sampleText")
 
 
 module.exports = {
-    root
+    root,
+    sampleText
 }
